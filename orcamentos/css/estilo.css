@@ -1,0 +1,11 @@
+
+.container table tbody tr:hover{
+	background-color: rgba(0,0,0,.10);
+}
+.container table tbody tr:hover td{
+	border: 1px solid white;
+}
+.container table tbody tr:hover{
+	background-color: rgba(0,0,0,.10);
+}
+
