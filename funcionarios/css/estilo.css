@@ -1,0 +1,31 @@
+.no-padding{
+	padding: 0px !important;  
+}
+.no-padding-left{
+	padding-left: 0px !important;
+}
+.no-padding-right{
+	padding-right: 0px !important;
+}
+#profissoes, #funcionarios{
+	padding-top: 60px;
+}
+#rome {
+	padding-top: 101px;
+	margin-bottom: 0px !important;
+}
+#rodape{
+	margin-top: 66px;
+	margin-bottom: 0px !important;
+}
+.container #tabela-profissoes #linha-profissoes:hover, .container #tabela-funcionarios #linha-funcionarios:hover{
+	background-color: rgba(0,0,0,.10);
+}
+.container #tabela-profissoes #linha-profissoes:hover td, .container #tabela-funcionarios #linha-funcionarios:hover td{
+	border: 1px solid white;
+}
+
+.depois-funcionarios, .primeiro-profissoes{
+	margin-bottom: 6px;
+	margin-top: 20px;
+}
