@@ -8,8 +8,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	 crossorigin="anonymous">
 	<link rel="stylesheet" href="css/estilo.css">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	 crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 	 crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
@@ -48,10 +48,10 @@
 		<hr class="my-4">
 		<p class="display-4">Começe Agora!!!</p>
 		<p class="lead primeiro-profissoes">Cadastre primeiro algumas profissoes...</p>
-		<a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#Modal-Categoria" id="btn-nova-categoria-home">Nova
+		<a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#Modal-Categoria" id="btn-nova-profissao-home">Nova
 			Profissao <i class="fas fa-briefcase"></i></a>
 		<p class="lead depois-funcionarios">E depois seus funcionários...</p>
-		<a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#Modal-Tarefa" id="btn-nova-tarefa-home">Novo
+		<a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#Modal-Tarefa" id="btn-novo-funcionario-home">Novo
 			Funcionário <i class="fas fa-user"></i></a>
 	</div>
 	<div class="container">
@@ -100,13 +100,13 @@
 			<table class="table table-striped table-bordered" id="tabela-funcionarios">
 				<thead>
 					<tr>
-						<th class="col-md-2">Nome</th>
-						<th class="col-md-1">Sexo</th>
-						<th class="col-md-2">CPF</th>
-						<th class="col-md-2">Telefone</th>
-						<th class="col-md-2">Cidade</th>
-						<th class="col-md-2">Profissao</th>
-						<th class="col-md-1">Salário</th>
+						<th>Nome</th>
+						<th>Sexo</th>
+						<th>CPF</th>
+						<th>Telefone</th>
+						<th>Cidade</th>
+						<th>Profissao</th>
+						<th>Salário</th>
 					</tr>
 				</thead>
 				<tbody id="corpo-tabela-funcionarios">
@@ -167,38 +167,42 @@
 					<form id="form-funcionarios">
 						<div class="form-group">
 							<input type="hidden" id="id-funcionario" value="">
-							<input type="text" class="form-control" id="nome-funcionario" placeholder="Nome" required="required">
+							<input type="text" class="form-control" id="nome-funcionario" placeholder="Nome" required="required" data-toggle="tooltip"
+							 title="Nome Funcionário">
 						</div>
 						<div class="form-group">
-							<select class="custom-select" id="sexo-funcionario">
+							<select class="custom-select" id="sexo-funcionario" data-toggle="tooltip" title="Sexo Funcionário">
 								<option value="">Sexo</option>
 								<option value="Masculino">Masculino</option>
 								<option value="Feminino">Feminino</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="cpf-funcionario" placeholder="CPF" required="required">
+							<input type="text" class="form-control" id="cpf-funcionario" placeholder="CPF" required="required" data-toggle="tooltip"
+							 title="CPF Funcionário">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="telefone-funcionario" placeholder="Telefone" required="required">
+							<input type="text" class="form-control" id="telefone-funcionario" placeholder="Telefone" required="required"
+							 data-toggle="tooltip" title="Telefone Funcionário">
 						</div>
 						<div class="form-group">
-							<select class="custom-select" id="estado-funcionario">
-								<option value="">Estado</option>
+							<select class="custom-select" id="estado-funcionario" data-toggle="tooltip" title="Estado de moradia">
+
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="custom-select" id="cidade-funcionario">
-								<option value="">Cidade</option>
+							<select class="custom-select" id="cidade-funcionario" data-toggle="tooltip" title="Cidade moradia">
+
 							</select>
 						</div>
 						<div class="form-group autocomplete">
-							<select class="custom-select" id="profissao-funcionario">
-								<option value="">Profissao</option>
+							<select class="custom-select" id="profissao-funcionario" data-toggle="tooltip" title="Profissão">
+
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="salario-funcionario" placeholder="Salário" required="required">
+							<input type="text" class="form-control" id="salario-funcionario" placeholder="Salário" required="required"
+							 data-toggle="tooltip" title="Salário">
 						</div>
 
 						<div class="form-group text-right">
@@ -224,8 +228,9 @@
 
 		</div>
 	</footer>
-	<!--	<script type="text/javascript" src="js/controlaCategorias.js"></script>
-	<script type="text/javascript" src="js/controlaTarefas.js"></script>-->
+
+	<script type="text/javascript" src="js/controlaFuncionarios.js"></script>
+
 </body>
 
 </html>
