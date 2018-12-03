@@ -6,7 +6,6 @@ var listaFuncionarios = [];
     var listaCidades = [];
 
 
-
     function salvarfuncionarios() {
         if (validaInputs()) {
             var funcionario = {};
@@ -16,6 +15,7 @@ var listaFuncionarios = [];
             funcionario.cpf = $("#cpf-funcionario").val();
             funcionario.telefone = $("#telefone-funcionario").val();
             funcionario.estado = $("#estado-funcionario").val();
+            funcionario.codEstado = $("#estado-funcionario option:selected").data('cod-estado');
             funcionario.cidade = $("#cidade-funcionario").val() + " - " + $("#estado-funcionario").val();
             funcionario.profissao = $("#profissao-funcionario").val();
             funcionario.salario = $("#salario-funcionario").val();
@@ -77,6 +77,7 @@ var listaFuncionarios = [];
                 controlaTolltips();
                 bloqueiaEdicaoFuncionario();
                 liberaExclusaoFuncionario();
+                carregaCidadesEditar(funcionario.codEstado);
                 editarFuncionario(funcionario.id);
             });
 
@@ -116,31 +117,28 @@ var listaFuncionarios = [];
             $("#cidade-funcionario").prop('disabled', true);
         }
         renderizaSelectEstados();
-
     });
 
 
     function renderizaSelectEstados() {
-
+        const corpoSelect = $("#estado-funcionario");
         $.ajax({
             'type': "GET",
             'url': "https://servicodados.ibge.gov.br/api/v1/localidades/estados",
             'success': function (retorno) {
                 listaEstados = retorno;
+
+                for (let i = 0; i < listaEstados.length; i++) {
+                    const estado = listaEstados[i];
+
+                    let linha = $('<option>');
+                    linha.attr("data-cod-estado", estado.id);
+                    linha.html(estado.nome);
+
+                    corpoSelect.append(linha);
+                }
             }
         });
-
-        const corpoSelect = $("#estado-funcionario");
-
-        for (let i = 0; i < listaEstados.length; i++) {
-            const estado = listaEstados[i];
-
-            let linha = $('<option>');
-            linha.attr("data-cod-estado", estado.id);
-            linha.html(estado.nome);
-
-            corpoSelect.append(linha);
-        }
     }
     var codEstado = 0;
     $("#estado-funcionario").on('change', function () {
@@ -159,21 +157,18 @@ var listaFuncionarios = [];
         const corpoSelectCity = $("#cidade-funcionario");
         let firstLinhaCity = $('<option>');
         firstLinhaCity.html('Escolha uma cidade...');
-        firstLinhaCity.attr("selected", "selected");
         corpoSelectCity.html('');
         corpoSelectCity.append(firstLinhaCity);
 
         const corpoSelectEst = $("#estado-funcionario");
         let firstLinhaEst = $('<option>');
         firstLinhaEst.html('Escolha um estado...');
-        firstLinhaEst.attr("selected", "selected");
         corpoSelectEst.html('');
         corpoSelectEst.append(firstLinhaEst);
 
         const corpoSelectProf = $("#profissao-funcionario");
         let firstLinhaProf = $('<option>');
         firstLinhaProf.html('Profissão...');
-        firstLinhaProf.attr("selected", "selected");
         corpoSelectProf.html('');
 
         let SecondLinhaProf = $('<option>');
@@ -183,28 +178,31 @@ var listaFuncionarios = [];
     }
 
     function renderizaSelectCidades() {
-
+        const corpoSelect = $("#cidade-funcionario");
         $.ajax({
             'type': "GET",
             'url': "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + codEstado + "/municipios",
             'success': function (retorno) {
                 listaCidades = retorno;
+
+                for (let i = 0; i < listaCidades.length; i++) {
+                    const city = listaCidades[i];
+
+                    let linha = $('<option>');
+
+                    linha.html(city.nome);
+
+                    corpoSelect.append(linha);
+                }
             }
         });
-
-        const corpoSelect = $("#cidade-funcionario");
-
-        for (let i = 0; i < listaCidades.length; i++) {
-            const city = listaCidades[i];
-
-            let linha = $('<option>');
-
-            linha.html(city.nome);
-
-            corpoSelect.append(linha);
-        }
     }
 
+    function carregaCidadesEditar(codEst) {
+        listaCidades = [];
+        codEstado = codEst;
+        renderizaSelectCidades();
+    }
 
     function editarFuncionario(id) {
         let funcionario = findFuncionarioById(id);
@@ -237,7 +235,6 @@ var listaFuncionarios = [];
         } else {
             return funcionarios[0];
         }
-
     }
 
     function controlaTolltips() {
@@ -290,7 +287,6 @@ var listaFuncionarios = [];
         $("#cidade-funcionario").prop('disabled', true);
         $("#profissao-funcionario").prop('disabled', true);
         $("#salario-funcionario").prop('disabled', true);
-
     }
 
     function novoBloqueiaExclusaoFuncionario() {
@@ -334,8 +330,6 @@ var listaFuncionarios = [];
         listaFuncionarios = JSON.parse(listaStorage) || [];
 
     }
-
-
 
     /* Executa assim que termina de carregar a pagina*/
 
