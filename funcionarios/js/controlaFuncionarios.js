@@ -79,6 +79,7 @@ var listaFuncionarios = [];
                 liberaExclusaoFuncionario();
                 carregaCidadesEditar(funcionario.codEstado);
                 editarFuncionario(funcionario.id);
+
             });
 
             /* cria elemento td - table data */
@@ -130,7 +131,6 @@ var listaFuncionarios = [];
 
                 for (let i = 0; i < listaEstados.length; i++) {
                     const estado = listaEstados[i];
-
                     let linha = $('<option>');
                     linha.attr("data-cod-estado", estado.id);
                     linha.html(estado.nome);
@@ -364,5 +364,8 @@ var listaFuncionarios = [];
         // previne a execucao padrao
         evt.preventDefault();
     });
+    return{
+        listaFuncionarios:listaFuncionarios
+    }
 })();
 
