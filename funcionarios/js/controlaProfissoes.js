@@ -1,6 +1,6 @@
 var listaProfissoes = [];
 
-(function () {
+PROFISSAO = (function () {
 
     var isEditando = false;
 
@@ -92,7 +92,7 @@ var listaProfissoes = [];
             limpaTudo();
         }
     });
-    
+
 
     function editarProfissao(id) {
         let profissao = findProfissaoById(id);
@@ -192,11 +192,11 @@ var listaProfissoes = [];
     renderizaProfissoes();
 
     // pega acao do botao Nova Profissao do Jumbotron
-    $("#btn-novo-profissao-home").on("click", function (evt) {
+    $("#btn-nova-profissao-home").on("click", function (evt) {
         novoBloqueiaExclusaoProfissao();
     });
     // pega acao do botao Nova Profissao acima da tabela de Profissoes
-    $("#btn-novo-profissao").on("click", function (evt) {
+    $("#btn-nova-profissao").on("click", function (evt) {
         novoBloqueiaExclusaoProfissao();
     });
     // pega acao do botao excluir Profissao dentro do modal de Profissao
@@ -220,8 +220,8 @@ var listaProfissoes = [];
         evt.preventDefault();
     });
 
-    return{
-    	listaProfissoes:listaProfissoes
+    return {
+        listaProfissoes: listaProfissoes
     }
 })();
 

@@ -1,4 +1,5 @@
 var listaFuncionarios = [];
+var listaProfissoes = PROFISSAO.listaProfissoes;
 (function () {
 
     var isEditando = false;
@@ -118,6 +119,7 @@ var listaFuncionarios = [];
             $("#cidade-funcionario").prop('disabled', true);
         }
         renderizaSelectEstados();
+        renderizaSelectProfissoes();
     });
 
 
@@ -170,11 +172,7 @@ var listaFuncionarios = [];
         let firstLinhaProf = $('<option>');
         firstLinhaProf.html('Profissão...');
         corpoSelectProf.html('');
-
-        let SecondLinhaProf = $('<option>');
-        SecondLinhaProf.html('Primeira Profissao');
-
-        corpoSelectProf.append(firstLinhaProf).append(SecondLinhaProf);
+        corpoSelectProf.append(firstLinhaProf);
     }
 
     function renderizaSelectCidades() {
@@ -202,6 +200,18 @@ var listaFuncionarios = [];
         listaCidades = [];
         codEstado = codEst;
         renderizaSelectCidades();
+    }
+
+    function renderizaSelectProfissoes() {
+        const corpoSelect = $("#profissao-funcionario");
+        corpoSelect.html('');
+        for (let i = 0; i < listaProfissoes.length; i++) {
+            const profissao = listaProfissoes[i];
+
+            let linha = $('<option>');
+            linha.html(profissao.nome);
+            corpoSelect.append(linha);
+        }
     }
 
     function editarFuncionario(id) {
@@ -364,8 +374,8 @@ var listaFuncionarios = [];
         // previne a execucao padrao
         evt.preventDefault();
     });
-    return{
-        listaFuncionarios:listaFuncionarios
+    return {
+        listaFuncionarios: listaFuncionarios
     }
 })();
 
