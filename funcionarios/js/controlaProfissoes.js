@@ -1,7 +1,18 @@
-var listaProfissoes = [];
+
+/* Deve calcular quantos empregados tem em cada profissao*/
+function calculaFuncionariosPorProfissao(nombreDaProfissao) {
+    var quantos = 0;
+    for (let index = 0; index < listaFuncionarios.length; index++) {
+        const bixoEmpregado = listaFuncionarios[index];
+        if (bixoEmpregado.profissao === nombreDaProfissao) {
+            quantos++;
+        }
+    }
+    return quantos;
+}
 
 PROFISSAO = (function () {
-
+    var listaProfissoes = [];
     var isEditando = false;
 
     function salvarProfissoes() {
@@ -119,6 +130,7 @@ PROFISSAO = (function () {
         }
     }
 
+
     function controlaTolltips() {
         $("#nome-profissao").tooltip(3);
         $("#area-profissao").tooltip(3);
@@ -183,7 +195,14 @@ PROFISSAO = (function () {
         const listaStorage = localStorage.getItem("listaProfissoes");
         /* converte para lista denovo*/
         listaProfissoes = JSON.parse(listaStorage) || [];
+    }
 
+    function pegafuncionarioDoLocalStorage() {
+        /* Busca no Local Storage pela key lista*/
+        const listaStorage = localStorage.getItem("listaFuncionarios");
+        /* converte para lista denovo*/
+        listaFuncionariosDaqui = JSON.parse(listaStorage) || [];
+        return listaFuncionariosDaqui;
     }
 
     /* Executa assim que termina de carregar a pagina*/

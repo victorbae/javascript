@@ -1,11 +1,11 @@
-var listaFuncionarios = [];
-var listaProfissoes = PROFISSAO.listaProfissoes;
-(function () {
 
+var listaProfissoes = PROFISSAO.listaProfissoes;
+
+FUNCIONARIOS = (function () {
+    var listaFuncionarios = [];
     var isEditando = false;
     var listaEstados = [];
     var listaCidades = [];
-
 
     function salvarfuncionarios() {
         if (validaInputs()) {
@@ -15,9 +15,9 @@ var listaProfissoes = PROFISSAO.listaProfissoes;
             funcionario.sexo = $("#sexo-funcionario").val();
             funcionario.cpf = $("#cpf-funcionario").val();
             funcionario.telefone = $("#telefone-funcionario").val();
-            funcionario.estado = $("#estado-funcionario").val();
-            funcionario.codEstado = $("#estado-funcionario option:selected").data('cod-estado');
-            funcionario.cidade = $("#cidade-funcionario").val() + " - " + $("#estado-funcionario").val();
+            funcionario.estado = $("#estado-funcionario option:selected").text();
+            funcionario.codEstado = $("#estado-funcionario").val();
+            funcionario.cidade = $("#cidade-funcionario").val();
             funcionario.profissao = $("#profissao-funcionario").val();
             funcionario.salario = $("#salario-funcionario").val();
             let idfuncionario = $('#id-funcionario').val();
@@ -80,8 +80,13 @@ var listaProfissoes = PROFISSAO.listaProfissoes;
                 liberaExclusaoFuncionario();
                 carregaCidadesEditar(funcionario.codEstado);
                 editarFuncionario(funcionario.id);
-
             });
+
+
+            linha.hover(function () {
+                renderizaSelectEstados();
+                carregaCidadesEditar(funcionario.codEstado);
+            })
 
             /* cria elemento td - table data */
             let tdNome = $('<td>');
@@ -97,7 +102,7 @@ var listaProfissoes = PROFISSAO.listaProfissoes;
             tdSexo.html(funcionario.sexo);
             tdCPF.html(funcionario.cpf);
             tdTelefone.html(funcionario.telefone);
-            tdCidade.html(funcionario.cidade);
+            tdCidade.html(funcionario.cidade + ' - ' + funcionario.estado);
             tdProfissão.html(funcionario.profissao);
             tdSalario.html(funcionario.salario);
 
@@ -113,11 +118,9 @@ var listaProfissoes = PROFISSAO.listaProfissoes;
     }
 
     $('#Modal-Funcionario').on('show.bs.modal', function (event) {
-        if (!isEditando) {
-            limpaTudo();
-            iniciaSelects();
-            $("#cidade-funcionario").prop('disabled', true);
-        }
+        limpaTudo();
+        iniciaSelects();
+        $("#cidade-funcionario").prop('disabled', true);
         renderizaSelectEstados();
         renderizaSelectProfissoes();
     });
@@ -134,8 +137,8 @@ var listaProfissoes = PROFISSAO.listaProfissoes;
                 for (let i = 0; i < listaEstados.length; i++) {
                     const estado = listaEstados[i];
                     let linha = $('<option>');
-                    linha.attr("data-cod-estado", estado.id);
-                    linha.html(estado.nome);
+                    linha.val(estado.id);
+                    linha.text(estado.nome);
 
                     corpoSelect.append(linha);
                 }
@@ -148,7 +151,7 @@ var listaProfissoes = PROFISSAO.listaProfissoes;
         if ($("#estado-funcionario").val() != 'Escolha um estado...') {
             $("#cidade-funcionario").html('Escolha uma cidade...');
             listaCidades = [];
-            codEstado = $("#estado-funcionario option:selected").data('cod-estado');
+            codEstado = $("#estado-funcionario").val();
             $("#cidade-funcionario").prop('disabled', false);
             renderizaSelectCidades();
         }
@@ -156,23 +159,19 @@ var listaProfissoes = PROFISSAO.listaProfissoes;
 
 
     function iniciaSelects() {
-        const corpoSelectCity = $("#cidade-funcionario");
-        let firstLinhaCity = $('<option>');
-        firstLinhaCity.html('Escolha uma cidade...');
-        corpoSelectCity.html('');
-        corpoSelectCity.append(firstLinhaCity);
+        if (!isEditando) {
+            const corpoSelectCity = $("#cidade-funcionario");
+            let firstLinhaCity = $('<option>');
+            firstLinhaCity.html('Escolha uma cidade...');
+            corpoSelectCity.html('');
+            corpoSelectCity.append(firstLinhaCity);
 
-        const corpoSelectEst = $("#estado-funcionario");
-        let firstLinhaEst = $('<option>');
-        firstLinhaEst.html('Escolha um estado...');
-        corpoSelectEst.html('');
-        corpoSelectEst.append(firstLinhaEst);
-
-        const corpoSelectProf = $("#profissao-funcionario");
-        let firstLinhaProf = $('<option>');
-        firstLinhaProf.html('Profissão...');
-        corpoSelectProf.html('');
-        corpoSelectProf.append(firstLinhaProf);
+            const corpoSelectEst = $("#estado-funcionario");
+            let firstLinhaEst = $('<option>');
+            firstLinhaEst.html('Escolha um estado...');
+            corpoSelectEst.html('');
+            corpoSelectEst.append(firstLinhaEst);
+        }
     }
 
     function renderizaSelectCidades() {
@@ -205,12 +204,18 @@ var listaProfissoes = PROFISSAO.listaProfissoes;
     function renderizaSelectProfissoes() {
         const corpoSelect = $("#profissao-funcionario");
         corpoSelect.html('');
+
         for (let i = 0; i < listaProfissoes.length; i++) {
             const profissao = listaProfissoes[i];
 
             let linha = $('<option>');
             linha.html(profissao.nome);
             corpoSelect.append(linha);
+
+            if (!isEditando && i < 1) {
+                linha.html('Profissão...');
+                corpoSelect.append(linha);
+            }
         }
     }
 
@@ -224,7 +229,7 @@ var listaProfissoes = PROFISSAO.listaProfissoes;
             $("#sexo-funcionario").val(funcionario.sexo);
             $("#cpf-funcionario").val(funcionario.cpf);
             $("#telefone-funcionario").val(funcionario.telefone);
-            $("#estado-funcionario").val(funcionario.estado);
+            $("#estado-funcionario").val(funcionario.codEstado);
             $("#cidade-funcionario").val(funcionario.cidade);
             $("#profissao-funcionario").val(funcionario.profissao);
             $("#salario-funcionario").val(funcionario.salario);
@@ -338,7 +343,6 @@ var listaProfissoes = PROFISSAO.listaProfissoes;
         const listaStorage = localStorage.getItem("listaFuncionarios");
         /* converte para lista denovo*/
         listaFuncionarios = JSON.parse(listaStorage) || [];
-
     }
 
     /* Executa assim que termina de carregar a pagina*/
@@ -374,8 +378,5 @@ var listaProfissoes = PROFISSAO.listaProfissoes;
         // previne a execucao padrao
         evt.preventDefault();
     });
-    return {
-        listaFuncionarios: listaFuncionarios
-    }
 })();
 
