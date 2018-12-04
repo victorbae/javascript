@@ -104,6 +104,11 @@
 		}
 		iniciaCampoComContadores()
 	}
+
+	$('#Modal-Tarefa').on('show.bs.modal', function (event) {
+		renderizaSelectCategorias();
+	})
+
 	function renderizaSelectCategorias() {
 		listaCategorias = contCat.renCat;
 		const corpoSelect = $("#categoria-tarefa");
@@ -127,9 +132,7 @@
 		}
 	}
 
-	$('#Modal-Tarefa').on('show.bs.modal', function (event) {
-		renderizaSelectCategorias()
-	})
+
 
 	function editarTarefa(id) {
 		let tarefa = findTarefaById(id);
