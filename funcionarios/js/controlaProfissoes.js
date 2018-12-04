@@ -1,16 +1,4 @@
-
-/* Deve calcular quantos empregados tem em cada profissao*/
-function calculaFuncionariosPorProfissao(nombreDaProfissao) {
-    var quantos = 0;
-    for (let index = 0; index < listaFuncionarios.length; index++) {
-        const bixoEmpregado = listaFuncionarios[index];
-        if (bixoEmpregado.profissao === nombreDaProfissao) {
-            quantos++;
-        }
-    }
-    return quantos;
-}
-
+var listaFunc = [];
 PROFISSAO = (function () {
     var listaProfissoes = [];
     var isEditando = false;
@@ -43,7 +31,7 @@ PROFISSAO = (function () {
             limpaTudo();
             $("#Modal-Profissao").modal('hide');
 
-            return true;
+            return false;
         }
     }
 
@@ -53,9 +41,22 @@ PROFISSAO = (function () {
             alert("Nome ou Area inválidos !!!");
             return false;
         }
+
+        pegaProfissaoDoLocalStorage();
+
+        for (var i = 0; i < listaProfissoes.length; i++) {
+        	if($("#nome-profissao").val() == listaProfissoes[i].nome){
+        		alert("Já existe uma profissão com esta nomenclatura!!");
+        		limpaTudo();
+        		$("#Modal-Profissao").modal('hide');
+        		return false;
+        	}
+        }
         return true;
     }
 
+
+    pegafuncionarioDoLocalStorageff();
 
     function renderizaProfissoes() {
         /* Busca tabela com esse ID*/
@@ -88,7 +89,7 @@ PROFISSAO = (function () {
             /* seta os conteudo das td com o que tem qeu ficar ali dentro*/
             tdNome.html(profissao.nome);
             tdArea.html(profissao.area);
-            tdQtd.html(0);
+            tdQtd.html(calculaFuncionariosPorProfissao(profissao.nome));
             if (profissao) {
                 /* concatena os Td dentro do Tr*/
                 linha.append(tdNome).append(tdArea).append(tdQtd);
@@ -197,7 +198,18 @@ PROFISSAO = (function () {
         listaProfissoes = JSON.parse(listaStorage) || [];
     }
 
-    function pegafuncionarioDoLocalStorage() {
+     function calculaFuncionariosPorProfissao(nombreDaProfissao) {
+    var quantos = 0;
+    for (let index = 0; index < listaFunc.length; index++) {
+        const bixoEmpregado = listaFunc[index];
+        if (bixoEmpregado.profissao === nombreDaProfissao) {
+            quantos++;
+        }
+    }
+    return quantos;
+    }
+
+    function pegafuncionarioDoLocalStorageff() {
         /* Busca no Local Storage pela key lista*/
         const listaStorage = localStorage.getItem("listaFuncionarios");
         /* converte para lista denovo*/
@@ -238,6 +250,13 @@ PROFISSAO = (function () {
         // previne a execucao padrao
         evt.preventDefault();
     });
+
+    function pegafuncionarioDoLocalStorageff() {
+        /* Busca no Local Storage pela key lista*/
+        const listaStorage = localStorage.getItem("listaFuncionarios");
+        /* converte para lista denovo*/
+        listaFunc = JSON.parse(listaStorage) || [];
+    }
 
     return {
         listaProfissoes: listaProfissoes

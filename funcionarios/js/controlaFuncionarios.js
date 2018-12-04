@@ -40,6 +40,7 @@ FUNCIONARIOS = (function () {
             salvafuncionarioNoLocalStorage();
             renderizafuncionarios();
             limpaTudo();
+            PROFISSAO.renderizafuncionarios();
             $("#Modal-Funcionario").modal('hide');
             return false;
         }
@@ -115,14 +116,15 @@ FUNCIONARIOS = (function () {
                 tbody.append(linha);
             }
         }
+
     }
 
     $('#Modal-Funcionario').on('show.bs.modal', function (event) {
         limpaTudo();
         iniciaSelects();
         $("#cidade-funcionario").prop('disabled', true);
-        renderizaSelectEstados();
         renderizaSelectProfissoes();
+        renderizaSelectEstados();
     });
 
 
@@ -203,19 +205,19 @@ FUNCIONARIOS = (function () {
 
     function renderizaSelectProfissoes() {
         const corpoSelect = $("#profissao-funcionario");
-        corpoSelect.html('');
-
+        if (!isEditando) {
+            let linha = $('<option>');
+            corpoSelect.html('');
+            linha.html('Profissão...');
+            corpoSelect.append(linha);    
+        }
+        
         for (let i = 0; i < listaProfissoes.length; i++) {
             const profissao = listaProfissoes[i];
 
             let linha = $('<option>');
             linha.html(profissao.nome);
             corpoSelect.append(linha);
-
-            if (!isEditando && i < 1) {
-                linha.html('Profissão...');
-                corpoSelect.append(linha);
-            }
         }
     }
 
@@ -328,6 +330,7 @@ FUNCIONARIOS = (function () {
         salvafuncionarioNoLocalStorage();
         renderizafuncionarios();
         $('#Modal-Funcionario').modal('hide');
+        PROFISSAO.renderizafuncionarios();
     }
 
     function salvafuncionarioNoLocalStorage() {
@@ -361,6 +364,7 @@ FUNCIONARIOS = (function () {
     // pega acao do botao excluir funcionario dentro do modal de funcionario
     $("#btn-excluir-funcionario").on("click", function (evt) {
         excluifuncionarioByButton();
+        PROFISSAO.renderizafuncionarios();
     });
     // pega acao do botao limpar funcionario dentro do modal de funcionario
     $("#btn-limpar-funcionario").on("click", function (evt) {
@@ -378,5 +382,7 @@ FUNCIONARIOS = (function () {
         // previne a execucao padrao
         evt.preventDefault();
     });
+
+   
 })();
 
