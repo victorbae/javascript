@@ -70,13 +70,13 @@
 
 			linha.attr("id", "linha-tarefas");
 
-			linha.onclick = function () {
+			linha.on('click', function () {
 				$('#Modal-Tarefa').modal('show');
 				isEditando = true;
 				bloqueiaEdicaoTarefa();
 				liberaExclusaoTarefa();
 				editarTarefa(tarefa.id);
-			};
+			});
 
 			/* cria elemento td - table data */
 			let tdTitulo = $('<td>');
