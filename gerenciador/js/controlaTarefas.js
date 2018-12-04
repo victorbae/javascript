@@ -60,7 +60,7 @@
 		const tbody = $("#corpo-tabela-tarefas");
 
 		/* Zera conteudo da tabela*/
-		tbody.html = '';
+		tbody.html('');
 
 		for (let i = 0; i < listaTarefas.length; i++) {
 			const tarefa = listaTarefas[i];
