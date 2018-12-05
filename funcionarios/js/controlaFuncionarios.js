@@ -40,14 +40,14 @@ FUNCIONARIOS = (function () {
             salvafuncionarioNoLocalStorage();
             renderizafuncionarios();
             limpaTudo();
-            PROFISSAO.renderizafuncionarios();
+
             $("#Modal-Funcionario").modal('hide');
             return false;
         }
     }
 
     function validaInputs() {
-        if ($("#sexo-funcionario").val() === "Sexo" ||
+        if ($("#sexo-funcionario").val() === "" ||
             $("#estado-funcionario").val() === "Escolha um estado..." ||
             $("#cidade-funcionario").val() === "Escolha uma cidade..." ||
             $("#profissao-funcionario").val() === "Profissão...") {
@@ -338,7 +338,6 @@ FUNCIONARIOS = (function () {
         salvafuncionarioNoLocalStorage();
         renderizafuncionarios();
         $('#Modal-Funcionario').modal('hide');
-        PROFISSAO.renderizafuncionarios();
     }
 
     function salvafuncionarioNoLocalStorage() {
@@ -372,7 +371,6 @@ FUNCIONARIOS = (function () {
     // pega acao do botao excluir funcionario dentro do modal de funcionario
     $("#btn-excluir-funcionario").on("click", function (evt) {
         excluifuncionarioByButton();
-        PROFISSAO.renderizafuncionarios();
     });
     // pega acao do botao limpar funcionario dentro do modal de funcionario
     $("#btn-limpar-funcionario").on("click", function (evt) {

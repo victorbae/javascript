@@ -45,12 +45,12 @@ PROFISSAO = (function () {
         pegaProfissaoDoLocalStorage();
 
         for (var i = 0; i < listaProfissoes.length; i++) {
-        	if($("#nome-profissao").val() == listaProfissoes[i].nome){
-        		alert("Já existe uma profissão com esta nomenclatura!!");
-        		limpaTudo();
-        		$("#Modal-Profissao").modal('hide');
-        		return false;
-        	}
+            if ($("#nome-profissao").val() == listaProfissoes[i].nome) {
+                alert("Já existe uma profissão com esta nomenclatura!!");
+                limpaTudo();
+                $("#Modal-Profissao").modal('hide');
+                return false;
+            }
         }
         return true;
     }
@@ -198,15 +198,15 @@ PROFISSAO = (function () {
         listaProfissoes = JSON.parse(listaStorage) || [];
     }
 
-     function calculaFuncionariosPorProfissao(nombreDaProfissao) {
-    var quantos = 0;
-    for (let index = 0; index < listaFunc.length; index++) {
-        const bixoEmpregado = listaFunc[index];
-        if (bixoEmpregado.profissao === nombreDaProfissao) {
-            quantos++;
+    function calculaFuncionariosPorProfissao(nombreDaProfissao) {
+        var quantos = 0;
+        for (let index = 0; index < listaFunc.length; index++) {
+            const bixoEmpregado = listaFunc[index];
+            if (bixoEmpregado.profissao === nombreDaProfissao) {
+                quantos++;
+            }
         }
-    }
-    return quantos;
+        return quantos;
     }
 
     function pegafuncionarioDoLocalStorageff() {
