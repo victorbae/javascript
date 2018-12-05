@@ -1,5 +1,5 @@
 
-var listaProfissoes = PROFISSAO.listaProfissoes;
+var listaProfissoes = [];
 
 FUNCIONARIOS = (function () {
     var listaFuncionarios = [];
@@ -203,15 +203,23 @@ FUNCIONARIOS = (function () {
         renderizaSelectCidades();
     }
 
+    function pegaProfissaoDoLocalStorage() {
+        /* Busca no Local Storage pela key lista*/
+        const listaStorage = localStorage.getItem("listaProfissoes");
+        /* converte para lista denovo*/
+        listaProfissoes = JSON.parse(listaStorage) || [];
+    }
+
     function renderizaSelectProfissoes() {
+        pegaProfissaoDoLocalStorage();
         const corpoSelect = $("#profissao-funcionario");
         if (!isEditando) {
             let linha = $('<option>');
             corpoSelect.html('');
             linha.html('Profissão...');
-            corpoSelect.append(linha);    
+            corpoSelect.append(linha);
         }
-        
+
         for (let i = 0; i < listaProfissoes.length; i++) {
             const profissao = listaProfissoes[i];
 
@@ -383,6 +391,6 @@ FUNCIONARIOS = (function () {
         evt.preventDefault();
     });
 
-   
+
 })();
 
