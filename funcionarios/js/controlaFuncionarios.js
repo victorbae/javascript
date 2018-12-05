@@ -76,6 +76,7 @@ FUNCIONARIOS = (function () {
             linha.on('click', function () {
                 isEditando = true;
                 $('#Modal-Funcionario').modal("show");
+                $('#titulo-funcionario').text('Editar Funcionario');
                 controlaTolltips();
                 bloqueiaEdicaoFuncionario();
                 liberaExclusaoFuncionario();
@@ -141,19 +142,15 @@ FUNCIONARIOS = (function () {
                     let linha = $('<option>');
                     linha.val(estado.id);
                     linha.text(estado.nome);
-
                     corpoSelect.append(linha);
                 }
             }
         });
     }
-    var codEstado = 0;
     $("#estado-funcionario").on('change', function () {
-        codEstado = 0;
         if ($("#estado-funcionario").val() != 'Escolha um estado...') {
             $("#cidade-funcionario").html('Escolha uma cidade...');
             listaCidades = [];
-            codEstado = $("#estado-funcionario").val();
             $("#cidade-funcionario").prop('disabled', false);
             renderizaSelectCidades();
         }
@@ -177,6 +174,7 @@ FUNCIONARIOS = (function () {
     }
 
     function renderizaSelectCidades() {
+        const codEstado = $("#estado-funcionario").val();
         const corpoSelect = $("#cidade-funcionario");
         $.ajax({
             'type': "GET",
@@ -362,10 +360,12 @@ FUNCIONARIOS = (function () {
 
     // pega acao do botao Nova funcionario do Jumbotron
     $("#btn-novo-funcionario-home").on("click", function (evt) {
+        $('#titulo-funcionario').text('Novo Funcionario');
         novoBloqueiaExclusaoFuncionario();
     });
     // pega acao do botao Nova funcionario acima da tabela de funcionarios
     $("#btn-novo-funcionario").on("click", function (evt) {
+        $('#titulo-funcionario').text('Novo Funcionario');
         novoBloqueiaExclusaoFuncionario();
     });
     // pega acao do botao excluir funcionario dentro do modal de funcionario
