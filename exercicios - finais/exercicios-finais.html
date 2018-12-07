@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercícios</title>
+    <style>
+        .erro {
+            color: red;
+            font-style: italic;
+        }
+
+        .sucesso {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <legend>Bem vindo à lista de exercícios finais</legend>
+        <div>
+            Esta lista de exercícios será autocorrigida. Não modifique o HTML pois ele não será tomado como base pelo
+            corretor.
+        </div>
+    </fieldset>
+
+    <fieldset data-peso="1">
+        <legend>1 - Adicione a class 'erro' para todos os span que possuem a class 'problema', e adicione a class
+            'sucesso' em todos os span que possuem a class 'ok'.</legend>
+        <span class="ok">ok</span>
+        <span class="problema">problema</span>
+        <span class="problema">problema</span>
+        <span class="problema">problema</span>
+        <span class="problema">problema</span>
+        <span class="ok">ok</span>
+        <span class="ok">ok</span>
+        <span class="ok">ok</span>
+        <span class="problema">ok</span>
+    </fieldset>
+
+    <fieldset data-peso="1">
+        <legend>2 - Crie um comando para remover a class 'erro' dos span de dentro da div com id #div-filha</legend>
+
+        <div>
+            <span class="erro">conteúdo proibido</span>
+            <span class="erro">conteúdo proibido</span>
+            <div id="div-filha">
+                <span class="erro">conteúdo neutro</span>
+                <span class="erro">conteúdo neutro</span>
+                <span class="sucesso">conteúdo permitido</span>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset data-peso="2">
+        <legend>3 - Crie um comando para criar os div conforme o padrão, limitando o número de divs conforme o atributo
+            'data-max' do button. Deve-se seguir a numeracão dos div. NÃO COLOQUE ALERTAS NEM MENSAGENS, o corretor
+            pode considerar como incorreto. Programe o comando com intuito de que o número máximo possa ser diferente
+            do que está no HTML.</legend>
+        <button data-max="10" id="create-me-btn">Clique para criar</button>
+        <div id="create-me">
+            <div>1 - Elemento número 1</div>
+            <div>2 - Elemento número 2</div>
+            <div>3 - Elemento número 3</div>
+            <div>4 - Elemento número 4</div>
+        </div>
+
+    </fieldset>
+
+    <fieldset data-peso="1">
+        <legend>4 - Crie um comando para copiar todo o conteúdo do div id #origem para a div id #destino ao clicar no
+            botão.</legend>
+        <button id="copy-me-btn">Clique para copiar</button>
+        <div id="origem">
+            <div>Este é um conteúdo serve de cópia para ser inserido</div>
+            <div>em sua totalidade dentro da outra div.</div>
+            <div class="sucesso">Inclusive com seus estilos css originais.</div>
+        </div>
+        <div id="destino">
+
+        </div>
+    </fieldset>
+
+    <fieldset data-peso="2">
+        <legend>5 - Faça um comando que calcule o total de cada produto e insira o texto na coluna referente. Considere
+            que o corretor irá adicionar uma linha com valores variados e aleatórios para verificar o cálculo.</legend>
+        <table border="solid 1" id="tabela-totais">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>Qtd</td>
+                    <td>Unit.</td>
+                    <td>Total</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Manga</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td class="total"></td>
+                </tr>
+                <tr>
+                    <td>Cimento</td>
+                    <td>3</td>
+                    <td>85.22</td>
+                    <td class="total"></td>
+                </tr>
+                <tr>
+                    <td>Tijolo</td>
+                    <td>4500</td>
+                    <td>0.36</td>
+                    <td class="total"></td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+
+    <fieldset data-peso="3">
+        <legend>6 - Faça um comando que calcule o total de cada produto e insira o texto na coluna referente. Calcule
+            também o total geral dos produtos e insira na coluna referente. Considere
+            que o corretor irá adicionar uma linha com valores variados e aleatórios para verificar o cálculo.</legend>
+        <table border="solid 1" id="tabela-totais-2">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>Qtd</td>
+                    <td>Unit.</td>
+                    <td>Total</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Manga</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td class="total"></td>
+                </tr>
+                <tr>
+                    <td>Cimento</td>
+                    <td>3</td>
+                    <td>85.22</td>
+                    <td class="total"></td>
+                </tr>
+                <tr>
+                    <td>Tijolo</td>
+                    <td>4500</td>
+                    <td>0.36</td>
+                    <td class="total"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Total</td>
+                    <td id="total-geral"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </fieldset>
+
+    <fieldset style="background-color: rgb(158, 149, 149);">
+        <dl>
+            <dt>Nota máxima possível: </dt>
+            <dd id="nota-max"></dd>
+
+            <dt><b>Sua nota: </b></dt>
+            <dd id="sua-nota"></dd>
+        </dl>
+    </fieldset>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+    <script type="text/javascript" src="respostas.js"></script>
+
+    <script type="text/javascript">
+        (function () {
+            var sum = 0;
+            for (f of document.getElementsByTagName('fieldset')) {
+                const peso = f.getAttribute('data-peso');
+                if (peso) {
+                    sum += parseFloat(peso);
+                }
+            }
+            document.getElementById('nota-max').innerText = sum;
+
+
+
+        })();
+    </script>
+</body>
+
+</html>
